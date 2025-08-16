@@ -1,7 +1,7 @@
 <%-- 
-    Document   : calcular
+ Este video se explica en el video 231 y explica como usar metodos de una clase externa en un archivo
     Created on : 15 ago 2025, 7:10:47 p.m.
-    Author     : gueko
+    
 --%>
 
 <%@page import="metodos.java.calcula" %>

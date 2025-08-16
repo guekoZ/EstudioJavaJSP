@@ -1,5 +1,6 @@
 /*
- 
+Este codigo se explica en el video 231 y explica como utlizar clases y metodos de un archivo externo 
+en un archivo JSP. En este caso se esta clase con sus metodos son llamados en el archivo calcular.jsp
  */
 package metodos.java;
 
