@@ -1,6 +1,5 @@
 <%-- 
-   ESte codigo se explica en los video 234 y 235, en estos viedo explica como hacer la conexcion con la base de datos
-por medio de un archivo jsp
+    
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -19,12 +18,10 @@ por medio de un archivo jsp
             
             //Se reciben los datos que se envian del formulario de la pagina html, se envian con post
             
-            String nombre = request.getParameter("nombre");
-            String apellido = request.getParameter("apellido");
+           
             String usuario = request.getParameter("usuario");
             String contra = request.getParameter("contra");
-            String pais = request.getParameter("pais");
-            String tecno = request.getParameter("tecnologias");
+           
             
             //Se hace mencion de la libreria que se instalo, en este caso se cargan los drivers mariadb. Es la forma en que 
             //inicia el driver del jdbc
@@ -33,14 +30,21 @@ por medio de un archivo jsp
             try{
 
             Connection miconexion = java.sql.DriverManager.getConnection("jdbc:mariadb://192.168.1.11:3306/proyecto_jsp", "root", "normab");
-
-            Statement miStatement = miconexion.createStatement();
-
-            String instruccionSql = "INSERT INTO usuarios(nombre,apellido,usuario,contrasena,pais,tecnologia) VALUES ('" + nombre + "','" + apellido + "','" + usuario + "','" + contra + "','" + pais + "','" + tecno + "')";
-
-            miStatement.executeUpdate(instruccionSql);
-
-            out.println("Datos agregados correctament");
+            
+            PreparedStatement c_preparada= miconexion.prepareStatement("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ? ");
+            
+           c_preparada.setString(1,usuario);
+           c_preparada.setString(2,contra);
+           
+           ResultSet miResultset = c_preparada.executeQuery();
+           
+           if(miResultset.absolute(1)){
+           out.println("El usuario esta autorizado");
+            }else{
+            
+            out.println("El usuario no esta autorizado");
+            }
+           
             
             }catch(Exception e){
             
@@ -48,7 +52,7 @@ por medio de un archivo jsp
             }
 
         %>
-
-
+        
+        
     </body>
 </html>
