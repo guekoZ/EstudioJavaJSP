@@ -1,5 +1,6 @@
 <%-- 
-    
+  Este codigo se explica en el video 236 y explica como validar un usuario en la base de datos proyecto_jsp
+los datos del formulario a este archivo, el cual realiza un busqueda en la base de datos por medio de consultas preparadas 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
