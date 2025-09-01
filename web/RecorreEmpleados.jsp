@@ -9,53 +9,69 @@
 <%@page import="java.util.*,java.sql.*,jsptags.Empleado"%>
 
 <%
-ArrayList<Empleado> datos= new ArrayList<>();
-   Class.forName("org.mariadb.jdbc.Driver");
+    ArrayList<Empleado> datos = new ArrayList<>();
+    Class.forName("org.mariadb.jdbc.Driver");
 
-try {
+    try {
         Connection miConexion = DriverManager.getConnection("jdbc:mariadb://192.168.1.11:3306/prueba", "root", "normab");
 
         Statement miStatement = miConexion.createStatement();
-        
-        String instruccionesSql= "SELECT * FROM empleados";
-        
-        ResultSet rs= miStatement.executeQuery(instruccionesSql);
-        
-        while(rs.next()){
-            
-            datos.add(new Empleado(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4)));
-                       
-            
+
+        String instruccionSql = "SELECT * FROM empleados";
+
+        ResultSet rs = miStatement.executeQuery(instruccionSql);
+
+        while (rs.next()) {
+
+            datos.add(new Empleado(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+
         }
         rs.close();
         miConexion.close();
-        
-        
-        
+
     } catch (Exception e) {
-        
+
         out.println("Ha ocurrido un error");
         e.printStackTrace();
-        
-    }
-pageContext.setAttribute("losEmpleados", datos);
 
-%>
+    }
+        
+    pageContext.setAttribute("losEmpleados", datos);
+    
+  %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+
+        <style>
+            .cabecera{
+                font-weight: bold;
+            }
+
+        </style>
     </head>
     <body>
-        <h1>Estos son los datos de la tabla!</h1>
-        
-        <c:forEach var="EmpTemp" items="${losEmpleados}">
+        <table border="1">
+            <tr class="cabecera"><td>Nombre</td><td>Apellido</td><td>Puesto</td><td>Salario</td></tr>
             
-            ${EmpTem.nombre} ${EmpTem.apellido} ${EmpTem.puesto} ${EmpTem.salario}<br>
-            
-        </c:forEach>
-        
+            <c:forEach var="EmpTemp" items="${losEmpleados}">
+                <tr>
+                    <td>${EmpTemp.nombre}</td> <td>${EmpTemp.apellido} </td> <td>${EmpTemp.puesto}</td>
+                    
+                    <td>
+                    
+                        <c:if test="${EmpTemp.salario < 40000}">  ${EmpTemp.salario + 5000} </c:if>
+                       <c:if test="${EmpTemp.salario >= 40000}">  ${EmpTemp.salario} </c:if>
+                    </td>
+                
+                </tr>
+                
+                
+            </c:forEach>
+                
+        </table>
     </body>
 </html>

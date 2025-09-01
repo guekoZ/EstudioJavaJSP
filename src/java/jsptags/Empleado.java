@@ -9,9 +9,9 @@ public class Empleado {
     private String nombre;
     private String apellido;
     private String puesto;
-    private double salario;
+    private int salario;
 
-    public Empleado(String nombre, String apellido, String puesto, double salario) {
+    public Empleado(String nombre, String apellido, String puesto, int salario) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.puesto = puesto;
@@ -30,7 +30,7 @@ public class Empleado {
         this.puesto = puesto;
     }
 
-    public void setSalario(double salario) {
+    public void setSalario(int salario) {
         this.salario = salario;
     }
 
@@ -46,7 +46,7 @@ public class Empleado {
         return puesto;
     }
 
-    public double getSalario() {
+    public int getSalario() {
         return salario;
     }
     
