@@ -1,5 +1,6 @@
 <%-- 
-  Este codigo es explicado en el video 243 y habla sobre los tags, ademas utiliza la clase empleados
+  Este codigo es explicado en los videos 243, 244, 245 y habla sobre las tags, ademas utiliza la clase empleados 
+que genera las instancias para llenar el arraylist que utlizamos
 --%>
 
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
@@ -62,9 +63,29 @@
                     <td>${EmpTemp.nombre}</td> <td>${EmpTemp.apellido} </td> <td>${EmpTemp.puesto}</td>
                     
                     <td>
-                    
-                        <c:if test="${EmpTemp.salario < 40000}">  ${EmpTemp.salario + 5000} </c:if>
-                       <c:if test="${EmpTemp.salario >= 40000}">  ${EmpTemp.salario} </c:if>
+                        
+                        
+   <%-- --------------------Aqui se implementan las tags, en este caso la tag if y la tag choose------------------- --%>
+                        
+                        
+                        <%-- <c:if test="${EmpTemp.salario < 40000}">  ${EmpTemp.salario + 5000} </c:if>
+                       <c:if test="${EmpTemp.salario >= 40000}">  ${EmpTemp.salario} </c:if> --%>
+                        
+                        <c:choose>
+                            <c:when test="${EmpTemp.salario < 40000}">
+                                ${EmpTemp.salario + 5000}
+                            </c:when>
+                            <c:when test="${EmpTemp.salario < 40000 && EmpTemp.salario<= 50000}">
+                                ${EmpTemp.salario + 2000}
+                            </c:when>
+                            
+                            <c:otherwise>
+                                ${EmpTemp.salario}
+                            </c:otherwise>
+                            
+                        </c:choose>
+                        
+                        
                     </td>
                 
                 </tr>
